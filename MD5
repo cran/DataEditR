@@ -1,0 +1,16 @@
+1e51507da110106ea346eaa123d53471 *DESCRIPTION
+a2644e47d322ac477b52ca5c61e9fbd3 *NAMESPACE
+b749d368c340c9931d615769ab805b8a *NEWS.md
+58d70fb61552a248d0686f83855e9bb5 *R/data_edit.R
+90bdaa87d79af83cf82a25c7f027e9d1 *R/record.R
+f08169e27b582792352f0632aa94b3d3 *R/utilities.R
+2ec3d9be272f5067398446589aa5f42b *README.md
+3787a3f76f95f4955cbe03bc5db06b94 *build/vignette.rds
+f85e62037cf7eb83b5ec9ea84c847494 *inst/doc/DataEditR.R
+585eb90e5d904d47606db3c1ef1284df *inst/doc/DataEditR.Rmd
+77b647a3a37fa95ca484618bbf217163 *inst/doc/DataEditR.html
+942329ce9e3d6c89371899db96e87ff7 *man/data_edit.Rd
+269eaeae896635334ce644fd666acd0f *man/figures/logo.png
+585eb90e5d904d47606db3c1ef1284df *vignettes/DataEditR.Rmd
+430522e77acca208c07cb58c351563f3 *vignettes/logo.html
+269eaeae896635334ce644fd666acd0f *vignettes/logo.png

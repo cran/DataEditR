@@ -13,18 +13,21 @@ knitr::opts_chunk$set(
 #  readr::write_lines(html, path = "logo.html")
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  devtools::install_github("DillonHammill/DataEditR")
+#  install.packages("DataEditR")
 #  library(DataEditR)
+
+## ---- eval = FALSE------------------------------------------------------------
+#  devtools::install_github("DillonHammill/DataEditR")
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-1.png')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars,
-#            viewer = FALSE)
+#            viewer = "browser")
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  mtcars <- data_edit("mtcars.csv",
@@ -38,13 +41,13 @@ head(mtcars)
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-2.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-3.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
@@ -54,13 +57,13 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-4.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-5.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
@@ -73,7 +76,7 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 #  data_edit(mtcars,
 #            col_bind = new_col)
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-6.png')
 
 ## ---- eval = FALSE------------------------------------------------------------
@@ -83,14 +86,45 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit()
 
-## ---- echo=FALSE, fig.align="center", out.width = '60%'-----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-7.gif')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-7.png')
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  data_edit(c(3, 3))
+#  data_edit(c(20, 15))
 
-## ---- echo=FALSE, fig.align="center", out.width = '40%'-----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-8.gif')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-8.png')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(c("Date", "Country", "Temperature", "Rainfall", "Visibility", "Humidity"))
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-9.png')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(mtcars)
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-10.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(mtcars)
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-11.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(mtcars)
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-12.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  mtcars_subset <- data_edit(mtcars)
+#  str(mtcars_subset)
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-13.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  # Add character column
@@ -115,26 +149,43 @@ str(mtcars_new)
 #                          write_args = list(sep = ",",
 #                                            row.names = TRUE))
 
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-14.png')
+
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars,
 #            col_bind = "fast",
 #            col_options = list(fast = c(TRUE,FALSE)))
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-9.gif')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-15.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  # Add column for car colour
 #  data_edit(mtcars,
-#            col_bind = "col",
-#            col_options = list(col = c("red",
-#                                        "blue",
-#                                        "orange",
-#                                        "green",
-#                                        "black")))
+#            col_bind = "colour",
+#            col_options = list(colour = c("red",
+#                                          "blue",
+#                                          "orange",
+#                                          "green",
+#                                          "black")))
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-10.gif')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-16.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(c("date", "time", "region", "temperature"),
+#            col_options = list(date = "date"))
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-17.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(c("date", "time", "user", "password"),
+#            col_options = list(password = "password"))
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-18.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars,
@@ -147,13 +198,16 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 #            logo_size = 100,
 #            title = "mtcars")
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-11.png')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-19.png')
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars,
 #            theme = "cosmo")
 
-## ---- echo=FALSE, fig.align="center", out.width = '100%'----------------------
-knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-12.png')
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-20.png')
+
+## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
+knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif')
 

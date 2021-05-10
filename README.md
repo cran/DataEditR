@@ -8,14 +8,13 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Travis build
-status](https://travis-ci.com/DillonHammill/DataEditR.svg?branch=master)](https://travis-ci.com/DillonHammill/DataEditR)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/DillonHammill/DataEditR?branch=master&svg=true)](https://ci.appveyor.com/project/DillonHammill/DataEditR)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R build
+status](https://github.com/DillonHammill/DataEditR/workflows/R-CMD-check/badge.svg)](https://github.com/DillonHammill/DataEditR/actions?workflow=R-CMD-check)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/DataEditR)](https://CRAN.R-project.org/package=DataEditR)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/DataEditR)](https://cran.r-project.org/package=DataEditR)
 <!-- badges: end -->
 
 Manual data entry and editing in R can be tedious, especially if you
@@ -133,8 +132,8 @@ citation("DataEditR")
 #> 
 #> To cite package 'DataEditR' in publications use:
 #> 
-#>   Dillon Hammill (2020). DataEditR: An Interactive Editor for Viewing,
-#>   Entering, Filtering & Editing Data. R package version 0.0.9.
+#>   Dillon Hammill (2021). DataEditR: An Interactive Editor for Viewing,
+#>   Entering, Filtering & Editing Data. R package version 0.1.1.
 #>   https://github.com/DillonHammill/DataEditR
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -142,8 +141,8 @@ citation("DataEditR")
 #>   @Manual{,
 #>     title = {DataEditR: An Interactive Editor for Viewing, Entering, Filtering & Editing Data},
 #>     author = {Dillon Hammill},
-#>     year = {2020},
-#>     note = {R package version 0.0.9},
+#>     year = {2021},
+#>     note = {R package version 0.1.1},
 #>     url = {https://github.com/DillonHammill/DataEditR},
 #>   }
 ```

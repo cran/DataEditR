@@ -154,11 +154,16 @@ data_edit <- function(x = NULL,
                       code = FALSE,
                       ...) {
   
+  # DATA ENVIRONMENT -----------------------------------------------------------
+  
+  # SEARCH DATA OUTSIDE DATA_EDIT
+  envir <- parent.frame()
+  
   # PREPARE DATA ---------------------------------------------------------------
   
   # RSTUDIO ADDIN/DATA
   context <- getActiveDocumentContext()
-  if(nzchar(context$selection[[1]]$text)) {
+  if(is.null(x) & nzchar(context$selection[[1]]$text)) {
     data <- context$selection[[1]]$text
   } else {
     if(!is.null(dim(x))) {
@@ -280,7 +285,8 @@ data_edit <- function(x = NULL,
                                   data = data,
                                   read_fun = read_fun,
                                   read_args = read_args,
-                                  hide = hide)
+                                  hide = hide,
+                                  envir = envir) # search in parent frame
     
     # RESET FILTERS
     observeEvent(data_input(), {
@@ -477,13 +483,11 @@ data_edit <- function(x = NULL,
                       stopOnCancel = FALSE)
   
   # SAVE AS
-  if(!is.null(x_edit)) {
-    if(!hide & !is.null(save_as)) {
-      do.call(
-        write_fun,
-        c(list(x_edit, save_as), write_args)
-      )
-    }
+  if(!is.null(x_edit) & !is.null(save_as)) {
+    do.call(
+      write_fun,
+      c(list(x_edit, save_as), write_args)
+    )
   }
   
   # RETURN DATA

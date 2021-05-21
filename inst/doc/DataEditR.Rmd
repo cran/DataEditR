@@ -146,7 +146,6 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 new_col <- matrix(rep(NA, nrow(mtcars)),
                   ncol = 1,
                   dimnames = list(NULL, "test"))
-
 # Edit data with new column added
 data_edit(mtcars,
           col_bind = new_col)
@@ -264,7 +263,6 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 # Add character column
 mtcars_new <- cbind(rownames(mtcars), mtcars)
 colnames(mtcars_new) <- "car"
-
 # Convert characters to factors
 mtcars_new <- data_edit(mtcars_new,
                         col_factor = TRUE)
@@ -405,6 +403,22 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 
 ```{r, echo=FALSE, fig.align="center", out.width = '90%'}
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif')
+```
+
+## 10. Exporting Code
+
+For reproducibility, it is possible to export the code required to generate the final edited version of your data. Simply set `code = TRUE` within `data_edit()` to print this code to console. Copying and pasting this code into the console will recreate the edited version of your data.
+
+```{r, eval = FALSE}
+data_edit(mtcars,
+          code = TRUE)
+```
+
+Alternatively, users can get `DataEditR` to automatically create a new R script to store this code by providing a name for the R script to `code`. For example, the below code creates a new R script called `mtcars_edit.R` and inserts the code required to programmatically generate the final edited version of your data.
+
+```{r, eval = FALSE}
+data_edit(mtcars,
+          code = "mtcars_edit.R")
 ```
 
 ## Summary

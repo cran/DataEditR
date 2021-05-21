@@ -71,7 +71,6 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 #  new_col <- matrix(rep(NA, nrow(mtcars)),
 #                    ncol = 1,
 #                    dimnames = list(NULL, "test"))
-#  
 #  # Edit data with new column added
 #  data_edit(mtcars,
 #            col_bind = new_col)
@@ -130,7 +129,6 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 #  # Add character column
 #  mtcars_new <- cbind(rownames(mtcars), mtcars)
 #  colnames(mtcars_new) <- "car"
-#  
 #  # Convert characters to factors
 #  mtcars_new <- data_edit(mtcars_new,
 #                          col_factor = TRUE)
@@ -210,4 +208,12 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 
 ## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif')
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(mtcars,
+#            code = TRUE)
+
+## ---- eval = FALSE------------------------------------------------------------
+#  data_edit(mtcars,
+#            code = "mtcars_edit.R")
 

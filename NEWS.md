@@ -1,3 +1,9 @@
+# DataEditR 0.1.2
+
+* `data_edit()` can now export the code required to generate the final edited version of the data to an R script.
+* Update vignette and website to demonstrate usage of `code` argument.
+* Make sure to search the correct environment when creating templates or reading files.
+
 # DataEditR 0.1.1
 
 * Ensure `dataInput()` searches for data outside `data_edit()`.

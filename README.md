@@ -40,6 +40,13 @@ library(devtools)
 install_github("DillonHammill/DataEditR")
 ```
 
+To ensure that `DataEditR` works as expected, you will also need to
+install my fork of `rhandsontable`:
+
+``` r
+devtools::install_github("DillonHammill/rhandsontable")
+```
+
 ## Usage
 
 **DataEditR** ships with a series of shiny modules, namely `dataInput`,
@@ -64,7 +71,7 @@ add-in should you prefer to interact with it in this way.
 -   return appropriately formatted data as an R object for downstream
     use
 -   code required to create edited data can be optionally printed to the
-    console
+    console or saved to a file
 -   support for custom themes through `shinythemes` package
 -   customisable user interface (title, logo and modules)
 -   row indices are always displayed for easy navigation
@@ -133,7 +140,7 @@ citation("DataEditR")
 #> To cite package 'DataEditR' in publications use:
 #> 
 #>   Dillon Hammill (2021). DataEditR: An Interactive Editor for Viewing,
-#>   Entering, Filtering & Editing Data. R package version 0.1.1.
+#>   Entering, Filtering & Editing Data. R package version 0.1.2.
 #>   https://github.com/DillonHammill/DataEditR
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -142,7 +149,7 @@ citation("DataEditR")
 #>     title = {DataEditR: An Interactive Editor for Viewing, Entering, Filtering & Editing Data},
 #>     author = {Dillon Hammill},
 #>     year = {2021},
-#>     note = {R package version 0.1.1},
+#>     note = {R package version 0.1.2},
 #>     url = {https://github.com/DillonHammill/DataEditR},
 #>   }
 ```

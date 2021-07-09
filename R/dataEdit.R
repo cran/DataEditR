@@ -61,11 +61,11 @@
 #'
 #'   server <- function(input, output, session) {
 #'     data_to_edit <- dataInputServer("input-1")
-#'     data_to_edit <- dataEditServer("edit-1",
+#'     data_edit <- dataEditServer("edit-1",
 #'       data = data_to_edit
 #'     )
 #'     dataOutputServer("output-1",
-#'       data = data_to_edit
+#'       data = data_edit
 #'     )
 #'   }
 #'
@@ -365,6 +365,8 @@ dataEditServer <- function(id,
                         colHeaders = colnames(values$x),
                         rowHeaders = rownames(values$x),
                         manualColumnResize = TRUE,
+                        highlightCol = TRUE,
+                        highlightRow = TRUE,
                         ...,
                         afterOnCellMouseDown = java_script(
                           "function(event, coords, th) {

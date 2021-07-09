@@ -1,3 +1,12 @@
+# DataEditR 0.1.3
+
+* Display hints when user hovers cursor over buttons.
+* Make sure R objects containing `.` can be loaded into the data editor.
+* Turn on highlighting for columns and rows.
+* Add `dataSync` module to handle synchronisation of an edited data subset with the complete dataset.
+* Improved support for tibbles.
+* Fix `dataFilter` to ensure the logic and levels are always updated when the column selection changes.
+
 # DataEditR 0.1.2
 
 * `data_edit()` can now export the code required to generate the final edited version of the data to an R script.
@@ -6,7 +15,7 @@
 
 # DataEditR 0.1.1
 
-* Ensure `dataInput()` searches for data outside `data_edit()`.
+* Ensure `dataInput` searches for data outside `data_edit()`.
 * Prevent loading of highlighted data object in RStudio when data has been supplied to `data_edit()` directly.
 * Allow saving by `write_fun` whenever `save_as` is supplied.
 

@@ -48,7 +48,7 @@
 #' @param col_edit logical indicating whether columns can be added or removed,
 #'   set to TRUE by default.
 #' @param col_options named list containing the options for columns that use
-#'   dropdown menus or checkboxes.
+#'   dropdown menus, dates, checkboxes or passwords.
 #' @param col_stretch logical indicating whether columns should be stretched to
 #'   fill the full width of the display, set to FALSE by default.
 #' @param col_factor logical indicating whether character columns should be
@@ -163,9 +163,15 @@ data_edit <- function(x = NULL,
   # PREPARE DATA ---------------------------------------------------------------
   
   # RSTUDIO ADDIN/DATA
-  context <- getActiveDocumentContext()
-  if(is.null(x) & nzchar(context$selection[[1]]$text)) {
-    data <- context$selection[[1]]$text
+  if(Sys.getenv("RSTUDIO") == "1") {
+    context <- getActiveDocumentContext()$selection[[1]]$text
+  } else {
+    context <- ""
+  }
+  
+  # LOAD DATA THROUGH RSTUDIO ADDIN
+  if(is.null(x) & nzchar(context)) {
+    data <- context
   } else {
     if(!is.null(dim(x))) {
       data <- as.character(substitute(x))
@@ -430,14 +436,32 @@ data_edit <- function(x = NULL,
     observeEvent(input$done, {
       # HIDDEN INPUTS - SYNC & RETURN
       if(hide == TRUE) {
+        if(!is.null(values$data_active) & !is.null(save_as)) {
+          do.call(
+            write_fun,
+            c(list(values$data_active, save_as), write_args)
+          )
+        }
         stopApp(values$data_active)
       # VISIBLE INPUTS
       } else {
         # DATA ACTIVE
         if(values$cut) {
+          if(!is.null(values$data_active) & !is.null(save_as)) {
+            do.call(
+              write_fun,
+              c(list(values$data_active, save_as), write_args)
+            )
+          }
           stopApp(values$data_active)
           # DATA UPDATE
         } else {
+          if(!is.null(values$data) & !is.null(save_as)) {
+            do.call(
+              write_fun,
+              c(list(values$data, save_as), write_args)
+            )
+          }
           stopApp(values$data)
         }
       }
@@ -472,12 +496,12 @@ data_edit <- function(x = NULL,
   # x_edit <- shiny::shinyApp(ui, server)
   
   # SAVE AS
-  if(!is.null(x_edit) & !is.null(save_as)) {
-    do.call(
-      write_fun,
-      c(list(x_edit, save_as), write_args)
-    )
-  }
+  # if(!is.null(x_edit) & !is.null(save_as)) {
+  #   do.call(
+  #     write_fun,
+  #     c(list(x_edit, save_as), write_args)
+  #   )
+  # }
   
   # RETURN DATA
   if(is.null(x_edit)) {

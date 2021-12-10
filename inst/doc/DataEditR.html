@@ -526,7 +526,33 @@ data_edit(mtcars,
 
 <p><img src="https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif" title="plot of chunk unnamed-chunk-53" alt="plot of chunk unnamed-chunk-53" width="90%" style="display: block; margin: auto;" /></p>
 
-<h2>10. Exporting Code</h2>
+<h2>10. Interactively Edit Googlesheets</h2>
+
+<p><code>DataEditR</code> can also be used to interactively edit googlesheets using <code>googlesheets4</code>. Simply authorise <code>googlesheets</code>, create a new sheet, edit the data using <code>data_edit()</code> and write the edited data to the created sheet.</p>
+
+<pre><code class="r">
+library(googlesheets4)
+
+# Authorise
+gs4_auth(
+  email = &quot;username@gmail.com&quot;
+)
+
+# Create a sheet
+ss <- gs4_create(
+  &quot;mtcars&quot;
+)
+
+# Edit data
+mtcars_new <- data_edit(
+  mtcars,
+  save_as = ss,
+  write_fun = &quot;write_sheet&quot;,
+  write_args = list(sheet = &quot;mtcars&quot;)
+)
+</code></pre>
+
+<h2>11. Exporting Code</h2>
 
 <p>For reproducibility, it is possible to export the code required to generate the final edited version of your data. Simply set <code>code = TRUE</code> within <code>data_edit()</code> to print this code to the console. Copying and pasting this code into the console will recreate the edited version of your data.</p>
 

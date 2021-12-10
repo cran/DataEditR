@@ -210,6 +210,27 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif')
 
 ## ---- eval = FALSE------------------------------------------------------------
+#  library(googlesheets4)
+#  
+#  # Authorise
+#  gs4_auth(
+#    email = "username@gmail.com"
+#  )
+#  
+#  # Create a sheet
+#  ss <- gs4_create(
+#    "mtcars"
+#  )
+#  
+#  # Edit data
+#  mtcars_new <- data_edit(
+#    mtcars,
+#    save_as = ss,
+#    write_fun = "write_sheet",
+#    write_args = list(sheet = "mtcars")
+#  )
+
+## ---- eval = FALSE------------------------------------------------------------
 #  data_edit(mtcars,
 #            code = TRUE)
 

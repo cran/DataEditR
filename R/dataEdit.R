@@ -145,10 +145,23 @@ dataEditServer <- function(id,
       if (!is.null(data_to_edit)) {
         
         # DATA INPUT -----------------------------------------------------------
+        
         data_to_edit <- data_template(data_to_edit,
                                       read_fun = read_fun,
                                       read_args = read_args
         )
+        
+        # EMPTY DATA -----------------------------------------------------------
+        
+        # NO ROWS - COVERED IN DATAINPUT TOO
+        if(nrow(data_to_edit) == 0 & is.null(row_bind)) {
+          row_bind <- 1
+        }
+
+        # NO COLUMNS - COVERED IN DATAINPUT TOO
+        if(ncol(data_to_edit) == 0 & is.null(col_bind)) {
+          col_bind <- "V1"
+        }
         
         # BIND ROWS ------------------------------------------------------------
         
@@ -375,6 +388,9 @@ dataEditServer <- function(id,
                           isColHeader = coords.row === -1,
                           input = document.createElement('input'),
                           rect = th.getBoundingClientRect(),
+                          bodyRect = document.body.getBoundingClientRect(),
+                          offsetY = rect.top - bodyRect.top,
+                          offsetX = rect.left - bodyRect.left,
                           addListeners = (events, headers, index) => {
                             events.split(' ').forEach(e => {
                               input.addEventListener(e, () => {
@@ -411,11 +427,11 @@ dataEditServer <- function(id,
                             input.setAttribute('type', 'text');
                             input.style.cssText = '' +
                               'position:absolute;' +
-                              'left:' + rect.left + 'px;' +
-                              'top:' + rect.top + 'px;' +
-                              'width:' + (rect.width - 4) + 'px;' +
-                              'height:' + (rect.height - 4) + 'px;' +
-                              'z-index:1000;' +
+                              'left:' + offsetX + 'px;' +
+                              'top:' + offsetY + 'px;' +
+                              'width:' + rect.width + 'px;' +
+                              'height:' + rect.height + 'px;' +
+                              'z-index:10000;' +
                               'text-align:center';
                             document.body.appendChild(input);
                           };

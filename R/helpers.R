@@ -25,7 +25,7 @@ data_template <- function(x = NULL,
       matrix(rep("", 100),
              ncol = 10,
              nrow = 10,
-             dimnames = list(NULL,
+             dimnames = list(1:10,
                              paste0("V", 1:10))),
       stringsAsFactors = FALSE,
       check.names = FALSE
@@ -47,8 +47,13 @@ data_template <- function(x = NULL,
     } else if(is.character(x)) {
       # FILE NAME
       if(length(x) == 1 & nzchar(file_ext(x[1]))) {
-        x <- do.call(read_fun,
-                     c(list(x), read_args))
+        x <- do.call(
+          read_fun,
+          c(
+            list(x), 
+            read_args
+          )
+        )
       # COLUMN NAMES
       } else {
         x <- data.frame(
@@ -60,6 +65,11 @@ data_template <- function(x = NULL,
         )
       }
     }
+  }
+  
+  # ROW INDICES
+  if(is.null(rownames(x))) {
+    rownames(x) <- seq_len(nrow(x))
   }
   
   # TEMPLATE
@@ -108,7 +118,8 @@ data_format <- function(data,
         data <- data[, -1, drop = FALSE]
       }
     } else {
-      rownames(data) <- NULL
+      # KEEP ROW INDICES AS ROWNAMES
+      # rownames(data) <- NULL
     }
     # MATRIX - SAME COLUMN CLASS
     if("matrix" %in% data_class) {
@@ -140,7 +151,7 @@ data_bind_cols <- function(data = NULL,
       # NEW COLUMNS
       if (is.null(dim(col_bind))) {
         # COLUMNS AS LIST
-        if (class(col_bind) == "list") {
+        if (inherits(col_bind, "list")) {
           # NAMES
           if (is.null(names(col_bind))) {
             names(col_bind) <- paste0("V", length(col_bind))
@@ -156,12 +167,13 @@ data_bind_cols <- function(data = NULL,
           col_bind <- do.call("cbind", col_bind)
           # COLUMN NAMES
         } else {
-          col_bind <- matrix(rep("", nrow(data) * length(col_bind)),
-                             ncol = length(col_bind),
-                             dimnames = list(
-                               rownames(data),
-                               col_bind
-                             )
+          col_bind <- matrix(
+            rep("", nrow(data) * length(col_bind)),
+            ncol = length(col_bind),
+            dimnames = list(
+              rownames(data),
+              col_bind
+            )
           )
         }
       }
@@ -191,7 +203,7 @@ data_bind_rows <- function(data = NULL,
       # NEW ROWS
       if (is.null(dim(row_bind))) {
         # ROWS AS LIST
-        if (class(row_bind) == "list") {
+        if (inherits(row_bind, "list")) {
           # NAMES NOT NECESSARY
           # LENGTHS
           ind <- which(!unlist(lapply(row_bind, length)) == ncol(data))
@@ -204,12 +216,13 @@ data_bind_rows <- function(data = NULL,
           row_bind <- do.call("rbind", row_bind)
           # ROW NAMES
         } else {
-          row_bind <- matrix(rep("", ncol(data) * length(row_bind)),
-                             nrow = length(row_bind),
-                             dimnames = list(
-                               row_bind,
-                               colnames(data)
-                             )
+          row_bind <- matrix(
+            rep("", ncol(data) * length(row_bind)),
+            nrow = length(row_bind),
+            dimnames = list(
+              row_bind,
+              colnames(data)
+            )
           )
         }
       }

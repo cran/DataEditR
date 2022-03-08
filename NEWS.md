@@ -1,3 +1,9 @@
+# DataEditR 0.1.5
+
+* Make the switch to `bslib` for more flexibility in setting custom themes `data_edit()`. Users can now supply a `bs_theme` object to the `theme` argument to fully customise the appearance of the `data_edit()` UI.
+* Fix handling of numeric row names to ensure maintenance of row indices relative to the master copy.
+* Improved handling of highlighted `data_edit()` calls within RStudio.
+
 # DataEditR 0.1.4
 
 * Fix header location on scroll.

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Preparation</title>
+<title>DataEditR</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,6 +201,9 @@ hr {
 </head>
 
 <body>
+
+<h1>DataEditR</h1>
+
 <p><strong>DataEditR</strong> is an R package built on shiny and rhandsontable that makes it easy to interactively view, enter, filter and edit data. In this vignette we will explore some of the key features that are available through the <code>data_edit()</code> function. </p>
 
 <h2>Preparation</h2>
@@ -512,10 +515,22 @@ data_edit(mtcars,
 
 <h3>8.3 Custom themes</h3>
 
-<p><code>data_edit()</code> makes use of the <code>shinythemes</code> package to customise the appearance of the data editor. You can explore the different themes by supplying the name of a valid <code>shinythemes</code> theme to the <code>theme</code> argument.</p>
-
-<pre><code class="r">data_edit(mtcars,
+<p><code>data_edit()</code> makes use of the <code>bslib</code> package to customise the appearance of the data editor. You can explore the different themes by supplying the name of a preset <a href="https://bootswatch.com/3/">bslib</a> theme to the <code>theme</code> argument. Alternatively, you can create your own custom <code>bs_theme</code> and supply that object to <code>theme</code> instead.</p>
+<pre><code class="r"># Preset theme
+data_edit(mtcars,
           theme = &quot;cosmo&quot;)
+
+# Custom theme
+library(bslib)
+custom_theme <- bs_theme(
+  version = 3,
+  bootswatch = &quot;cosmo&quot;
+)
+
+data_edit(
+  mtcars,
+  theme = custom_theme
+)
 </code></pre>
 
 <p><img src="https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-20.png" title="plot of chunk unnamed-chunk-52" alt="plot of chunk unnamed-chunk-52" width="90%" style="display: block; margin: auto;" /></p>
@@ -526,33 +541,7 @@ data_edit(mtcars,
 
 <p><img src="https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-21.gif" title="plot of chunk unnamed-chunk-53" alt="plot of chunk unnamed-chunk-53" width="90%" style="display: block; margin: auto;" /></p>
 
-<h2>10. Interactively Edit Googlesheets</h2>
-
-<p><code>DataEditR</code> can also be used to interactively edit googlesheets using <code>googlesheets4</code>. Simply authorise <code>googlesheets</code>, create a new sheet, edit the data using <code>data_edit()</code> and write the edited data to the created sheet.</p>
-
-<pre><code class="r">
-library(googlesheets4)
-
-# Authorise
-gs4_auth(
-  email = &quot;username@gmail.com&quot;
-)
-
-# Create a sheet
-ss <- gs4_create(
-  &quot;mtcars&quot;
-)
-
-# Edit data
-mtcars_new <- data_edit(
-  mtcars,
-  save_as = ss,
-  write_fun = &quot;write_sheet&quot;,
-  write_args = list(sheet = &quot;mtcars&quot;)
-)
-</code></pre>
-
-<h2>11. Exporting Code</h2>
+<h2>10. Exporting Code</h2>
 
 <p>For reproducibility, it is possible to export the code required to generate the final edited version of your data. Simply set <code>code = TRUE</code> within <code>data_edit()</code> to print this code to the console. Copying and pasting this code into the console will recreate the edited version of your data.</p>
 

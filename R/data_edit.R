@@ -112,7 +112,7 @@
 #' @importFrom shiny runGadget dialogViewer browserViewer paneViewer splitLayout
 #'   fluidPage column stopApp reactiveValues actionButton insertUI
 #' @importFrom shinyjs useShinyjs hidden show
-#' @importFrom shinythemes shinytheme
+#' @importFrom bslib bs_theme
 #' @importFrom miniUI gadgetTitleBar
 #' @importFrom shinyBS bsButton updateButton addTooltip
 #' @importFrom rhandsontable %>%
@@ -165,6 +165,12 @@ data_edit <- function(x = NULL,
   # RSTUDIO ADDIN/DATA
   if(Sys.getenv("RSTUDIO") == "1") {
     context <- getActiveDocumentContext()$selection[[1]]$text
+    # CHECK DATA_EDIT() CALL HIGHLIGHTED
+    if(nzchar(context)) {
+      if(!exists(context, envir = envir)) {
+        context <- ""
+      }
+    }
   } else {
     context <- ""
   }
@@ -230,7 +236,18 @@ data_edit <- function(x = NULL,
   # USER INTERFACE
   ui <- fluidPage(
     title,
-    theme = shinytheme(theme),
+    theme = if(is.null(theme)) {
+      NULL
+    } else {
+      if("bs_theme" %in% class(theme)) {
+        theme
+      } else {
+        bs_theme(
+          version = 3, # version 4 places DONE on left
+          bootswatch = theme
+        )
+      }
+    },
     useShinyjs(),
     fluidRow(
       column(
@@ -284,19 +301,24 @@ data_edit <- function(x = NULL,
     }
     
     # DATA STORAGE
-    values <- reactiveValues(data = NULL, # original data
-                             data_active = NULL, # displayed data
-                             rows = NULL,
-                             columns = NULL,
-                             cut = FALSE)
+    values <- reactiveValues(
+      data = NULL, # original data
+      data_active = NULL, # displayed data
+      rows = NULL,
+      columns = NULL,
+      cut = FALSE,
+      row_index = NULL
+    )
     
     # DATA INPUT
-    data_input <- dataInputServer("input1",
-                                  data = data,
-                                  read_fun = read_fun,
-                                  read_args = read_args,
-                                  hide = hide,
-                                  envir = envir) # search in parent frame
+    data_input <- dataInputServer(
+      "input1",
+      data = data,
+      read_fun = read_fun,
+      read_args = read_args,
+      hide = hide,
+      envir = envir # search in parent frame
+    ) 
     
     # RESET FILTERS
     observeEvent(data_input(), {
@@ -312,16 +334,20 @@ data_edit <- function(x = NULL,
     # FILTERS ALWAYS RESET ON DATA SYNC
     
     # DATA SELECT
-    data_select <- dataSelectServer("select1",
-                                    data = reactive(values$data),
-                                    hide = hide,
-                                    hover_text = "select columns")
+    data_select <- dataSelectServer(
+      "select1",
+      data = reactive(values$data),
+      hide = hide,
+      hover_text = "select columns"
+    )
     
     # DATA FILTER
-    data_filter <- dataFilterServer("filter1",
-                                    data = reactive(values$data),
-                                    hide = hide,
-                                    hover_text = "filter rows")
+    data_filter <- dataFilterServer(
+      "filter1",
+      data = reactive(values$data),
+      hide = hide,
+      hover_text = "filter rows"
+    )
     
     # UPDATE FILTERS
     observe({
@@ -355,19 +381,27 @@ data_edit <- function(x = NULL,
       }
     })
     
+    # ROW INDEX - ROWS IN MASTER COPY
+    observe({
+      values$row_index <- nrow(values$data)
+    })
+    
     # DATAEDIT - ENTIRE DATASET
-    data_update <- dataEditServer("edit1",
-                                  data = reactive({values$data_active}),
-                                  col_bind = NULL, # endless loop!
-                                  col_edit = col_edit,
-                                  col_options = col_options,
-                                  col_stretch = col_stretch,
-                                  col_names = col_names,
-                                  col_readonly = col_readonly,
-                                  col_factor = col_factor,
-                                  row_bind = NULL, # endless loop!
-                                  row_edit = row_edit,
-                                  quiet = quiet)
+    data_update <- dataEditServer(
+      "edit1",
+      data = reactive({values$data_active}),
+      col_bind = NULL, # endless loop!
+      col_edit = col_edit,
+      col_options = col_options,
+      col_stretch = col_stretch,
+      col_names = col_names,
+      col_readonly = col_readonly,
+      col_factor = col_factor,
+      row_bind = NULL, # endless loop!
+      row_edit = row_edit,
+      row_index = reactive({values$row_index}), # row_index + 1 for new rows
+      quiet = quiet
+    )
     
     # UPDATE ACTIVE DATA
     observe({
@@ -375,34 +409,42 @@ data_edit <- function(x = NULL,
     })
     
     # SYNC
-    data_sync <- dataSyncServer("sync1",
-                                data = reactive(values$data),
-                                data_subset = reactive(values$data_active),
-                                rows = reactive(values$rows),
-                                columns = reactive(values$cols),
-                                hide = hide,
-                                hover_text = "synchronise")
+    data_sync <- dataSyncServer(
+      "sync1",
+      data = reactive(values$data),
+      data_subset = reactive(values$data_active),
+      rows = reactive(values$rows),
+      columns = reactive(values$cols),
+      hide = hide,
+      hover_text = "synchronise"
+    )
+    
+    # DATASYNC - ONLY UPDATE MASTER - REMOVE FILTERS FOR DISPLAY
     observe({
       values$data <- data_sync()
     })
     
     # DATA OUTPUT - DATA ACTIVE
-    dataOutputServer("output-active",
-                     data = reactive({values$data_active}),
-                     save_as = save_as,
-                     write_fun = write_fun,
-                     write_args = write_args,
-                     hide = hide,
-                     hover_text = "save selection \n to file")
+    dataOutputServer(
+      "output-active",
+      data = reactive({values$data_active}),
+      save_as = save_as,
+      write_fun = write_fun,
+      write_args = write_args,
+      hide = hide,
+      hover_text = "save selection \n to file"
+    )
     
     # DATA OUTPUT - DATA ENTIRE
-    dataOutputServer("output-update",
-                     data = reactive({values$data}),
-                     save_as = save_as,
-                     write_fun = write_fun,
-                     write_args = write_args,
-                     hide = hide,
-                     hover_text = "save to file")
+    dataOutputServer(
+      "output-update",
+      data = reactive({values$data}),
+      save_as = save_as,
+      write_fun = write_fun,
+      write_args = write_args,
+      hide = hide,
+      hover_text = "save to file"
+    )
     
     # CUT
     observeEvent(input$cut, {

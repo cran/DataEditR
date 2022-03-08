@@ -200,8 +200,22 @@ knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEdi
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-19.png')
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  data_edit(mtcars,
-#            theme = "cosmo")
+#  # Preset theme
+#  data_edit(
+#    mtcars,
+#    theme = "cosmo"
+#  )
+#  
+#  # Custom theme
+#  library(bslib)
+#  custom_theme <- bs_theme(
+#    version = 3,
+#    bootswatch = "cosmo"
+#  )
+#  data_edit(
+#    mtcars,
+#    theme = custom_theme
+#  )
 
 ## ---- echo=FALSE, fig.align="center", out.width = '90%'-----------------------
 knitr::include_graphics('https://raw.githubusercontent.com/DillonHammill/DataEditR/master/vignettes/DataEditR/DataEditR-20.png')
